@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import convertFactorToAPR from './modules/apr'
 
 function App() {
+
+  const [factor, setFactor] = useState('.24')
+  const [apr, setApr] = useState([])
+ 
+  const handleChange = (e) => {
+    setFactor(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(factor)
+    setApr(convertFactorToAPR(factor))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleSubmit} > 
+        <input onChange={handleChange} placeholder='Factor Rate' value={factor}/>
+        <input type='submit' value="Convert" />
+      </form>
+      {apr.map((type, index) => index === 0 ? <div>Weekly: {type}</div> : <div>Yearly: {type}</div>)}
     </div>
   );
 }
