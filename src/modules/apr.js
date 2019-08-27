@@ -58,7 +58,7 @@ const convertFactorToAPR = (factor) => {
             
             accuracy < .9999 ? weeklyAPR += (.00001 / count) : weeklyAPR -= (.00001 / count)
             count += 1
-            result = [ ( weeklyAPR * 100 ).toFixed(2) + '%' , ( weeklyAPR*52 *100 ).toFixed(2) + '%' ]
+            result = ( weeklyAPR * 100 ).toFixed(2) + '%'
         }
         return result
     }
